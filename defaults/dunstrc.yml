@@ -1,0 +1,25 @@
+---
+dunst_allow_markup: yes
+dunst_sort: yes
+dunst_alignment: left
+dunst_font_icon: '{{ font_icon|default("FontAwesome") }}'
+dunst_bounce_freq: 64
+dunst_show_age_threshold: 60
+dunst_ignore_newlines: yes
+dunst_shrink: yes
+dunst_transparency: 0
+dunst_idle_treshold: 120
+dunst_follow: keyboard
+dunst_sticky_history: yes
+dunst_history_length: 20
+dunst_show_indicators: yes
+dunst_line_height: 0
+dunst_separator_height: 5
+dunst_padding: 4
+dunst_horizontal_padding: 8
+dunst_separator_color: frame
+dunst_startup_notification: false
+dunst_dmenu: '/usr/bin/dmenu -p dunst:'
+dunst_browser: '{{ browser|default("/usr/bin/firefox") }}'
+dunst_icon_position: off
+dunst_frame_width: 5
