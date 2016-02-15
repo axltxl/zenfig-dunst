@@ -1,0 +1,9 @@
+---
+author: Alejandro Ricoveri
+name: dunst
+description: blablabla
+version: 0.0.1
+templates:
+    config:
+        output_file: .config/dunst/dunstrc
+

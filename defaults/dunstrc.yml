@@ -1,8 +1,10 @@
 ---
+dunst_font: '{{ @font }}'
+dunst_font_size: '{{ @font_size }}'
 dunst_allow_markup: yes
 dunst_sort: yes
 dunst_alignment: left
-dunst_font_icon: '{{ font_icon|default("FontAwesome") }}'
+dunst_font_icon: '{{ @font_icon }}'
 dunst_bounce_freq: 64
 dunst_show_age_threshold: 60
 dunst_ignore_newlines: yes
@@ -20,6 +22,6 @@ dunst_horizontal_padding: 8
 dunst_separator_color: frame
 dunst_startup_notification: false
 dunst_dmenu: '/usr/bin/dmenu -p dunst:'
-dunst_browser: '{{ browser|default("/usr/bin/firefox") }}'
+dunst_browser: '{{ @browser }}'
 dunst_icon_position: off
 dunst_frame_width: 5
