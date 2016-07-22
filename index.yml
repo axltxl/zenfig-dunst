@@ -1,9 +1,9 @@
 ---
 author: Alejandro Ricoveri
 name: dunst
-description: blablabla
+description: zenfiguration files for dunst
 version: 0.0.1
 templates:
     config:
-        output_file: .config/dunst/dunstrc
+        output_file: '{{ @dunst_config_file }}'
 

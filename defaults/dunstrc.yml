@@ -1,27 +1,186 @@
 ---
+# Destination file for dusnt configuration
+dunst_config_file: '{{ "%s/.config/dunst/dunstrc"|format(@zenfig_install_prefix) }}'
+
+# Default font settings
 dunst_font: '{{ @font }}'
 dunst_font_size: '{{ @font_size }}'
+
+# Allow a small subset of html markup:
+#   <b>bold</b>
+#   <i>italic</i>
+#   <s>strikethrough</s>
+#   <u>underline</u>
+#
+# For a complete reference see
+# <http://developer.gnome.org/pango/stable/PangoMarkupFormat.html>.
+# If markup is not allowed, those tags will be stripped out of the
+# message.
 dunst_allow_markup: yes
+
+# Sort messages by urgency.#
 dunst_sort: yes
+
+# Show how many messages are currently hidden (because of geometry).#
+dunst_indicate_hidden: yes
+
+# Alignment of message text.
+# Possible values are "left", "center" and "right".
 dunst_alignment: left
+
+#
 dunst_font_icon: '{{ @font_icon }}'
+
+# The geometry of the window:
+# [{width}]x{height}[+/-{x}+/-{y}]
+# The geometry of the message window.
+# The height is measured in number of notifications everything else
+# in pixels.  If the width is omitted but the height is given
+# ("-geometry x2"), the message window expands over the whole screen
+# (dmenu-like).  If width is 0, the window expands to the longest
+# message displayed.  A positive x is measured from the left, a
+# negative from the right side of the screen.  Y is measured from
+# the top and down respectevly.
+# The width can be negative.  In this case the actual width is the
+# screen width minus the width defined in within the geometry option.
+dunst_width: 400
+dunst_height: 0
+dunst_xoffset: -20
+dunst_yoffset: 20
+dunst_geometry: ""
+
+# The frequency with wich text that is longer than the notification
+# window allows bounces back and forth.
+# This option conflicts with "word_wrap".
+# Set to 0 to disable.
 dunst_bounce_freq: 64
+
+# Show age of message if message is older than show_age_threshold
+# seconds.
+# Set to -1 to disable.
 dunst_show_age_threshold: 60
-dunst_ignore_newlines: yes
+
+# Split notifications into multiple lines if they don't fit into geometry.
+dunst_word_wrap: yes
+
+# Ignore newlines '\n' in notifications.
+dunst_ignore_newline: yes
+
+# Shrink window if it's smaller than the width.  Will be ignored if width is 0.
 dunst_shrink: yes
+
+# The transparency of the window.  Range: [0; 100].
+# This option will only work if a compositing windowmanager is
+# present (e.g. xcompmgr, compiz, etc.).
 dunst_transparency: 0
+
+# Don't remove messages, if the user is idle (no mouse or keyboard input)
+# for longer than idle_threshold seconds.
+# Set to 0 to disable.
 dunst_idle_treshold: 120
+
+# Display notification on focused monitor.  Possible modes are:
+#   mouse: follow mouse pointer
+#   keyboard: follow window with keyboard focus
+#   none: don't follow anything
+#
+# "keyboard" needs a windowmanager that exports the
+# _NET_ACTIVE_WINDOW property.
+# This should be the case for almost all modern window managers.
+#
+# If this option is set to mouse or keyboard, the monitor option
+# will be ignored.
 dunst_follow: keyboard
+
+# Should a notification popped up from history be sticky or timeout
+# as if it would normally do.
 dunst_sticky_history: yes
+
+# Maximum amount of notifications kept in history
 dunst_history_length: 20
+
+# Display indicators for URLs (U) and actions (A).
 dunst_show_indicators: yes
+
+# The height of a single line.  If the height is smaller than the
+# font height, it will get raised to the font height.
+# This adds empty space above and under the text.
 dunst_line_height: 0
+
+# Draw a line of "separator_height" pixel height between two
+# notifications.
+# Set to 0 to disable.
 dunst_separator_height: 5
+
+# Padding between text and separator.
 dunst_padding: 4
+
+# Horizontal padding.
 dunst_horizontal_padding: 8
+
+# Define a color for the separator.
+# possible values are:
+#  * auto: dunst tries to find a color fitting to the background;
+#  * foreground: use the same color as the foreground;
+#  * frame: use the same color as the frame;
+#  * anything else will be interpreted as a X color.
 dunst_separator_color: frame
+
+# Print a notification on startup.
+# This is mainly for error detection, since dbus (re-)starts dunst
+# automatically after a crash.
 dunst_startup_notification: false
+
+# dmenu path.
 dunst_dmenu: '/usr/bin/dmenu -p dunst:'
+
+# Browser for opening urls in context menu.
 dunst_browser: '{{ @browser }}'
-dunst_icon_position: off
+
+# Align icons left/right/off
+dunst_icon_position: 'off'
+
+# Frame (border) width and color
 dunst_frame_width: 5
+dunst_frame_color: '{{ @color_base00 }}'
+
+# Paths to default icons.
+dunst_icon_folders:
+    - /usr/share/icons/gnome/16x16/status/
+    - /usr/share/icons/gnome/16x16/devices/
+
+#########################################################
+# Shortcuts are specified as [modifier+][modifier+]...key
+# Available modifiers are "ctrl", "mod1" (the alt-key), "mod2",
+# "mod3" and "mod4" (windows-key).
+# Xev might be helpful to find names for keys.
+#########################################################
+
+# Close notification.
+dunst_close: ctrl+space
+
+# Close all notifications.
+dunst_close_all: ctrl+shift+space
+
+# Redisplay last message(s).
+# On the US keyboard layout "grave" is normally above TAB and left
+# of "1".
+dunst_history: ctrl+grave
+
+# Context menu.
+dunst_context: ctrl+shift+period
+
+#
+dunst_urgency:
+    low:
+        background: '{{ @color_base00 }}'
+        foreground: '{{ @color_base07 }}'
+        timeout: 2
+    normal:
+        background: '{{ @color_base0F }}'
+        foreground: '{{ @color_base00 }}'
+        timeout: 5
+    critical:
+        background: '{{ @color_base08 }}'
+        foreground: '{{ @color_base00 }}'
+        timeout: 0
