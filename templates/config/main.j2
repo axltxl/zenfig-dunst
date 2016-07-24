@@ -20,24 +20,24 @@ allow_markup =  {{ dunst_allow_markup|bool2str }}
 
 # https://developer.gnome.org/pango/stable/PangoMarkupFormat.html
 % macro dunst_set_fmt(icon='', icon_color=None, separator='')
-%-     if icon_color is none
+%      if icon_color is none
 %-         set icon_color = color_base00|norm_hex
 %-     endif
 <span font='{{ dunst_font_icon }} 14' color='{{ icon_color }}'>{{ icon }}</span> <b>%s</b>  <span font='{{ dunst_font_icon }} 14'>{{ separator }}</span> <span font_weight='light'>    %b</span>
 %- endmacro
 
 % macro dunst_norm_dim(d)
-%-    if d >= 0
-{{ "+%s"|format(d) }}
-%     else
+%     if d >= 0
+{{ "+%s" % d }}
+%-    else
 {{ d }}
 %-   endif
 %- endmacro
 
 % macro dunst_set_geometry(width, height, x, y)
-%-  set x = dunst_norm_dim(x)
-%-  set y = dunst_norm_dim(y)
-{{ "%sx%s%s%s"|format(width, height, x, y) }}
+%-    set x = dunst_norm_dim(x)
+%-    set y = dunst_norm_dim(y)
+{{ "%sx%s%s%s" % (width, height, x, y) }}
 %- endmacro
 
 
@@ -49,12 +49,10 @@ bounce_freq          = {{ dunst_bounce_freq }}
 show_age_threshold   = {{ dunst_show_age_threshold }}
 word_wrap            = {{ dunst_word_wrap|bool2str }}
 ignore_newline       = {{ dunst_ignore_newline|bool2str }}
-% if dunst_geometry|length > 0
-geometry             = "{{ dunst_geometry }}"
-% else
-geometry             = "{{ dunst_set_geometry(dunst_width, dunst_height, dunst_xoffset, dunst_yoffset) }}"
+%  if not dunst_geometry|length
+%-    set dunst_geometry = dunst_set_geometry(dunst_width, dunst_height, dunst_xoffset, dunst_yoffset)
 %- endif
-
+geometry             = "{{ dunst_geometry }}"
 shrink               = {{ dunst_shrink|bool2str }}
 transparency         = {{ dunst_transparency }}
 idle_threshold       = {{ dunst_idle_treshold }}
